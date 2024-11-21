@@ -29,11 +29,11 @@ export const addSchool = (req, res) => {
         return res.status(400).send({ error: 'Invalid input data' });
     }
 
-    const query = 'INSERT INTO schools (name, address, latitude, longitude) VALUES (?, ?, ?, ?)';
+    const query = 'INSERT INTO sql12746303.schools (name, address, latitude, longitude) VALUES (?, ?, ?, ?)';
     db.query(query, [name, address, latitude, longitude], (err) => {
         if (err) {
             console.error(err);
-            return res.status(500).send({ error: 'Database error' });
+            return res.status(500).send({ error: err });
         }
         res.status(201).send({ message: 'School added successfully' });
     });
@@ -61,11 +61,11 @@ export const listSchools = (req, res) => {
         return res.status(400).send({ error: 'Latitude and longitude must be provided and must be valid numbers' });
     }
     
-    const query = 'SELECT * FROM schools';
+    const query = 'SELECT * FROM sql12746303.schools';
     db.query(query, (err, results) => {
         if (err) {
             console.error(err);
-            return res.status(500).send({ error: 'Database error' });
+            return res.status(500).send({ error: err });
         }
 
         const sortedSchools = results.map((school) => ({
